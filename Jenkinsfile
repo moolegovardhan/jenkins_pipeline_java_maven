@@ -1,11 +1,10 @@
 node{
    stage('SCM Checkout'){
-     git 'https://github.com/moolegovardhan/SampleProject'
+     git 'https://github.com/moolegovardhan/jenkins-pipeline-cucumber-example.git'
    }
-   stage('Build'){
+   stage('Compile-Package'){
       // Get maven home path
       def mvnHome =  tool name: 'Maven', type: 'maven'   
-      bat "${mvnHome}/bin/mvn -Dmaven.test.failure.ignore clean package"
-   step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+      bat "${mvnHome}/bin/mvn package"
    }
 }
